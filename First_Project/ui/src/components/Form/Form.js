@@ -1,27 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./styles.js";
 import { Button, Paper, TextField, Typography } from "@material-ui/core";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { createPost } from "../../api/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../../api/index.js";
 
-const Form = () => {
+const Form = ({ currentID, setCurrentID }) => {
   const [postData, setPostdata] = useState({
     creator: "",
     title: "",
     message: "",
-    tags: '',
-    selectedFile:'',
+    tags: "",
+    selectedFile: "",
   });
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const post = useSelector((state) =>
+    currentID ? state.posts.find((p) => p._id === currentID) : null
+  );
+  useEffect(() => {
+    if (post) {
+      setPostdata(post);
+    }
+  }, [post]);
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(createPost(postData));
+    if (currentID) {
+      try {
+        dispatch(updatePost(currentID, postData));
+      } catch (error) {
+        console.log(error);
+      }
+    } else dispatch(createPost(postData));
+    clear();
   };
-  const clear = () => {};
+  const clear = () => {
+    setCurrentID(null);
+    setPostdata({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
+  };
   return (
     <Paper className={classes.paper}>
       <form
@@ -30,12 +52,14 @@ const Form = () => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Creating a Memory</Typography>
+        <Typography variant="h6">
+          {currentID ? "Editing" : "Creating"} a Memory
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"
           label="creator"
-          fullWidth 
+          fullWidth
           value={postData.creator}
           onChange={(e) =>
             setPostdata({ ...postData, creator: e.target.value })
@@ -76,8 +100,25 @@ const Form = () => {
             }
           />
         </div>
-        <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth >Submit</Button>
-        <Button variant="contained" color="primary" size="small" onClick={clear} fullWidth >Clear</Button>
+        <Button
+          className={classes.buttonSubmit}
+          variant="contained"
+          color="primary"
+          size="large"
+          type="submit"
+          fullWidth
+        >
+          Submit
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={() => clear()}
+          fullWidth
+        >
+          Clear
+        </Button>
       </form>
     </Paper>
   );
