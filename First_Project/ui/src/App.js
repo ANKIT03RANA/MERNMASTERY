@@ -35,7 +35,7 @@ function App() {
             alignItems="stretch"
             spacing={3}
           >
-            <Grid item xs={12} sm={7}>
+            <Grid className={classes.mainContainer} item  xs={12} sm={7}>
               <Posts setCurrentID={setCurrentID} />
             </Grid>
             <Grid item xs={12} sm={4}>

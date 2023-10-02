@@ -3,7 +3,7 @@ import useStyles from "./styles.js";
 import { Button, Paper, TextField, Typography } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost, updatePost } from "../../api/index.js";
+import { createPost, updatePost } from "../../actions/posts.js";
 
 const Form = ({ currentID, setCurrentID }) => {
   const [postData, setPostdata] = useState({
@@ -18,11 +18,13 @@ const Form = ({ currentID, setCurrentID }) => {
   const post = useSelector((state) =>
     currentID ? state.posts.find((p) => p._id === currentID) : null
   );
+
   useEffect(() => {
     if (post) {
       setPostdata(post);
     }
   }, [post]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentID) {
@@ -31,9 +33,11 @@ const Form = ({ currentID, setCurrentID }) => {
       } catch (error) {
         console.log(error);
       }
-    } else dispatch(createPost(postData));
+    } else 
+    dispatch(createPost(postData));
     clear();
   };
+
   const clear = () => {
     setCurrentID(null);
     setPostdata({
@@ -89,7 +93,7 @@ const Form = ({ currentID, setCurrentID }) => {
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostdata({ ...postData, tags: e.target.value })}
+          onChange={(e) => setPostdata({ ...postData, tags: e.target.value.split(',') })}
         />
         <div className={classes.fileInput}>
           <FileBase
