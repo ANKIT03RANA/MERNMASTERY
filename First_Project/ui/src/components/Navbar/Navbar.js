@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min.js";
 
 function Navbar() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,9 +20,8 @@ function Navbar() {
 
   useEffect(() => {
     const token = user?.token;
-
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [user,location]);
+    setUser(JSON.parse(localStorage?.getItem("profile")));
+  }, [location]);
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -48,7 +47,7 @@ function Navbar() {
             <Avatar
               className={classes.profile}
               alt={user.result.name}
-              src={user.result.iamgeUrl}
+              src={user.result.imageUrl}
             >
               {user.result.name.charAt(0)}
             </Avatar>

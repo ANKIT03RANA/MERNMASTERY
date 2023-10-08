@@ -10,8 +10,8 @@ import {
 import useStyles from "./styles.js";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined.js";
 import Input from "./Input.js";
-import { GoogleLogin } from "react-google-login";
-import Icon from "./Icon.js";
+// import { GoogleLogin } from "react-google-login";
+// import Icon from "./Icon.js";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 import { signin, signup } from "../../actions/auth.js";
@@ -40,7 +40,7 @@ function Auth() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(isSignUp){
+    if(!isSignUp){
         dispatch(signup(formData,history))
     }else{
         dispatch(signin(formData,history))
@@ -51,21 +51,21 @@ function Auth() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
-    try {
-      dispatch({ type: "AUTH", data: { result, token } });
-      history.pushState("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const googleSuccess = async (res) => {
+  //   const result = res?.profileObj;
+  //   const token = res?.tokenId;
+  //   try {
+  //     dispatch({ type: "AUTH", data: { result, token } });
+  //     history.pushState("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const googleFailure = (error) => {
-    console.log(error);
-    console.log("Google Sign is unsuccessful");
-  };
+  // const googleFailure = (error) => {
+  //   console.log(error);
+  //   console.log("Google Sign is unsuccessful");
+  // };
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -127,7 +127,7 @@ function Auth() {
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId="G"
             render={(renderProps) => (
               <Button
@@ -145,7 +145,7 @@ function Auth() {
                 Google Sign In
               </Button>
             )}
-          />
+          /> */}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
