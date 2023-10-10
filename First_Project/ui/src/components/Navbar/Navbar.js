@@ -51,7 +51,7 @@ function Navbar() {
         {user ? (
           <div className={classes.profile}>
             <Avatar
-              className={classes.profile}
+              className={classes.purple}
               alt={user.result.name}
               src={user.result.imageUrl}
             >
