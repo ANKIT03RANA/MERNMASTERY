@@ -1,7 +1,7 @@
 import * as api from "../api/index";
 import { AUTH } from "../constants/actionTypes";
 
-export const signup = (formData, history) => async (dispatch) => {
+export const signin = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
 
@@ -11,7 +11,7 @@ export const signup = (formData, history) => async (dispatch) => {
     console.log(error);
   }
 };
-export const signin = (formData, history) => async (dispatch) => {
+export const signup = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
 

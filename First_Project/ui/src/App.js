@@ -18,7 +18,8 @@ function App() {
           <Route
             path="/auth"
             exact
-            component={!user ? <Auth /> : <Redirect to="/posts" />}
+            component={()=>(!user ? <Auth /> : <Redirect to="/posts" />)}
+            // component={Auth}
           />
         </Switch>
       </Container>

@@ -46,6 +46,7 @@ function Auth() {
         dispatch(signin(formData,history))
     }
   };
+  // console.log("Auth");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
