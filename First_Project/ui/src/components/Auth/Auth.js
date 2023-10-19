@@ -36,12 +36,12 @@ function Auth() {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
     setShowPassword(false);
   };
+  console.log(isSignUp);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if(!isSignUp){
-        dispatch(signup(formData,history))
+    if(isSignUp){
+      dispatch(signup(formData,history))
     }else{
         dispatch(signin(formData,history))
     }

@@ -3,6 +3,7 @@ import { AUTH } from "../constants/actionTypes";
 
 export const signin = (formData, history) => async (dispatch) => {
   try {
+    console.log("signin");
     const { data } = await api.signIn(formData);
 
     dispatch({ type: AUTH, data });
