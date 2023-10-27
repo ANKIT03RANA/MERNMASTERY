@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from "styled-components"
+import background from "../images/Netflixbg.webp"
 
 function BackgroundImage() {
   return (
     <Container>
-      <img src='' alt='' />
+      <img src={background} alt="background" />
     </Container>
   )
 }
