@@ -3,14 +3,30 @@ import styled from "styled-components";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { signup } from "../actions/auth";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [showpassword, setShowPassword] = useState(false);
+  const [form,setForm] = useState({firstName:'',lastName:'',email:'',password:''})
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // useEffect(()=>{},[showpassword]);
+  const changeHandler= (e)=>{
+    setForm({...form, [e.target.name]: e.target.value})
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    // console.log(form);
+    dispatch(signup(form));
+    navigate("/");
+  }
 
   return (
-    <Container>
+    <Container showpassword={showpassword}>
       <BackgroundImage />
       <div className="content">
         <Header login />
@@ -23,15 +39,21 @@ function Signup() {
             </h6>
           </div>
           <div className="form">
-            <input type="email" placeholder="Email ID" name="email" />
+          {showpassword && (
+              <input type="text" placeholder="First Name" name="firstName" value={form.firstName} onChange={changeHandler} />
+            )}
             {showpassword && (
-              <input type="password" placeholder="Password" name="password" />
+              <input type="text" placeholder="Last Name" name="lastName" value={form.lastName} onChange={changeHandler} />
+            )}
+            <input type="email" placeholder="Email ID" name="email" value={form.email} onChange={changeHandler} />
+            {showpassword && (
+              <input type="password" placeholder="Password" name="password" value={form.password} onChange={changeHandler} />
             )}
             {!showpassword && (
               <button onClick={() => setShowPassword(true)}>Get Started</button>
             )}
           </div>
-          <button>Sign Up</button>
+          {showpassword && <button onClick={handleSubmit}>Sign Up</button>}
         </div>
       </div>
     </Container>
