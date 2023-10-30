@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../actions/auth";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
-  const [showpassword, setShowPassword] = useState(false);
+function Auth() {
+    const [showpassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -17,7 +17,8 @@ function Signup() {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const state = useSelector((state)=>state.auth.isSignUp);
+  console.log(state);
   // useEffect(()=>{},[showpassword]);
   const changeHandler = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,7 +27,8 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(form);
-    dispatch(signup(form,navigate));
+    dispatch(signup(form));
+    navigate("/");
   };
 
   return (
@@ -35,18 +37,19 @@ function Signup() {
       <div className="content">
         <Header login />
         <div className="body flex column a-center j-center">
-          <div className="text flex column">
+          {!state && <div className="text flex column">
             <h1>Unlimited movies, TV shows and more</h1>
             <h4>Watch anywhere. Cancel Anytime.</h4>
             <h6>
               Ready to watch? Enter your email to create or restart membership
             </h6>
-          </div>
+          </div>}
           <div className="form">
             {showpassword && (
               <input
                 type="text"
                 placeholder="First Name"
+                required
                 name="firstName"
                 value={form.firstName}
                 onChange={changeHandler}
@@ -56,6 +59,7 @@ function Signup() {
               <input
                 type="text"
                 placeholder="Last Name"
+                required
                 name="lastName"
                 value={form.lastName}
                 onChange={changeHandler}
@@ -65,23 +69,25 @@ function Signup() {
               type="email"
               placeholder="Email ID"
               name="email"
+              required
               value={form.email}
               onChange={changeHandler}
             />
-            {showpassword && (
+            {(state || showpassword) && (
               <input
                 type="password"
                 placeholder="Password"
+                required
                 name="password"
                 value={form.password}
                 onChange={changeHandler}
               />
             )}
-            {!showpassword && (
+            {!state && !showpassword && (
               <button onClick={() => setShowPassword(true)}>Get Started</button>
             )}
           </div>
-          {showpassword && <button onClick={handleSubmit}>Sign Up</button>}
+          {(state || showpassword) && <button onClick={handleSubmit}>{state? "Sign In": "Sign Up"}</button>}
         </div>
       </div>
     </Container>
@@ -146,4 +152,5 @@ const Container = styled.div`
     }
   }
 `;
-export default Signup;
+
+export default Auth
