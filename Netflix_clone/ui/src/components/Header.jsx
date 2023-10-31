@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../actions/auth";
 
 function Header(props) {
-//   const [login, setLogin] = useState(false);
-//   const dispatch = useDispatch();
+  const [login, setLogin] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
     <Container className="flex a-center j-between">

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Loginn";
 import Signup from "./pages/Signupp";
 import Netflix from "./pages/Netflix";
+import Auth from "./pages/Auth";
 
 function App() {
   return (
