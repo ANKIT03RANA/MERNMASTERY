@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../images/Netflixlogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaPowerOff, FaSearch } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { LOGOUT } from "../constants/actionTypes";
 
 function Navbar({ isScrolled }) {
   const links = [
@@ -14,8 +16,13 @@ function Navbar({ isScrolled }) {
 
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setInputHover] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSignOut = () => {};
+  const handleSignOut = () => {
+    dispatch({type:LOGOUT});
+    navigate("/login");
+  };
 
   return (
     <Container>
@@ -99,7 +106,7 @@ const Container = styled.div`
         .right{
             gap:1rem;
             button{
-                background-color:transparent:
+                background-color:transparent;
                 border:none;
                 cursor:pointer;
                 &:focus{
@@ -118,7 +125,7 @@ const Container = styled.div`
                 padding:0.2rem;
                 padding-left:0.5rem;
                 button{
-                    background-color:transparent:
+                    background-color:transparent;
                     border:none;
                     &:focus{
                         outline:none;
@@ -133,7 +140,7 @@ const Container = styled.div`
                     opacity:0;
                     visibility:hidden;
                     transition: 0.3s ease-in-out;
-                    background-color:transparent:
+                    background-color:black;
                     border:none;
                     color:white;
                     &:focus{

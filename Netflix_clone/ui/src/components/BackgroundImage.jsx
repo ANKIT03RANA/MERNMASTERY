@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
-import background from "../images/Netflixbg.webp"
+import background from "../images/Netflix.webp"
 
 function BackgroundImage() {
   return (
