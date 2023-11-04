@@ -7,7 +7,6 @@ function BackgroundImage() {
     <Container>
       <img src={background} alt="background" />
     </Container>
-    
   )
 }
 const Container= styled.div`
