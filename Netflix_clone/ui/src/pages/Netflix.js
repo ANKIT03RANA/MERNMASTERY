@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import NetflixBG from "../images/NetflixBG.jpeg";
-// import movielogo from "../images/Netflixbg.jpeg";
+import movielogo from "../images/strangerThingslogo.png";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 function Netflix() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -20,10 +22,10 @@ function Netflix() {
       <div className="hero">
         <img src={NetflixBG} alt="HomeBG" className="background-image"/>
         <div className="container">
-          <div className="logo">{/* <img src={} alt="Movie logo"/> */}</div>
+          <div className="logo"><img src={movielogo} alt="Movie logo"/></div>
           <div className="buttons flex">
             <button className="flex j-center a-center">
-              <FaPlay /> Play
+              <FaPlay onClick={()=>navigate("/player")}/> Play
             </button>
             <button className="flex j-center a-center">
               <AiOutlineInfoCircle /> More Info
@@ -40,7 +42,7 @@ const Container = styled.div`
     .hero{
         position: relative;
         .background-image{
-            filter:brightness(60);
+            filter:brightness(60%);
         }
         img{
             height:100vh;
@@ -51,7 +53,7 @@ const Container = styled.div`
             bottom:5rem;
             .logo{
                 img{
-                    width:100%;
+                    width:45%;
                     height:100%;
                     margin-left:5rem;
                 }
@@ -64,9 +66,9 @@ const Container = styled.div`
                     gap:1rem;
                     border-radius:0.2rem;
                     border:none;
-                    padding:0.5rem
-                    padding-left:2rem
-                    padding-right:2.4rem
+                    padding:0.5rem;
+                    padding-left:2rem;
+                    padding-right:2.4rem;
                     cursor:pointer;
                     transition:0.3s ease-in-out;
                     &:hover{
