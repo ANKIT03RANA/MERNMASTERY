@@ -18,6 +18,7 @@ function Player() {
   )
 }
 
+
 const Container = styled.div`
     .player{
         width:100vw;
