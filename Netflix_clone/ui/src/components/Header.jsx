@@ -14,15 +14,15 @@ function Header(props) {
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
-      {/* <button
+      <button
         onClick={() => {
           dispatch(logIn(!login));
           setLogin(!login);
         }}
-      > */}
-        <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
-        {props.login ? "Log In" : "Sign Up"}
-        {/* {login ? "Sign Up" : "Log In"} */}
+      >
+        {/* <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
+        {props.login ? "Log In" : "Sign Up"} */}
+        {login ? "Sign Up" : "Log In"}
       </button>
     </Container>
   );
@@ -31,6 +31,8 @@ function Header(props) {
 
 const Container = styled.div`
   padding: 0 4rem;
+  height: fit-content;
+  padding-top: 2rem;
   .logo {
     img {
       height: 3rem;

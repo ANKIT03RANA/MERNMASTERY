@@ -12,6 +12,7 @@ function BackgroundImage() {
 const Container= styled.div`
     height:100vh;
     width:100vw;
+    overflow-y:hidden;
     .img{
         height:100vh;
         width:100vw
