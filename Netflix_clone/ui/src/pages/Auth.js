@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../actions/auth";
 import { useNavigate } from "react-router-dom";
 
+
 function Auth() {
   const [showpassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
