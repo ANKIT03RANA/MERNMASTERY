@@ -1,10 +1,9 @@
+
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/Loginn";
-import Signup from "./pages/Signupp";
-import Netflix from "./pages/Netflix";
-import Auth from "./pages/Auth";
-import Player from "./pages/Player";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
+
 
 function App() {
   return (
@@ -12,8 +11,6 @@ function App() {
       <Routes>
         <Route exact path="/login" Component={Login} />
         <Route exact path="/signup" Component={Signup} />
-        <Route exact path="/player" Component={Player} />
-        <Route exact path="/" Component={Netflix} />
       </Routes>
     </BrowserRouter>
   );
